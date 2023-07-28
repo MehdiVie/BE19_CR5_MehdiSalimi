@@ -1,0 +1,11 @@
+.home_pic {
+    height: 400px;
+    text-align: center;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto;
+    background-color: #cbdcea;
+    padding: 10px;
+  }
