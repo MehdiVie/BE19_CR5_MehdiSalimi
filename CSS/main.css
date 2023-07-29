@@ -1,11 +1,90 @@
+.card-img-top {
+    width: 100%;
+    height: 18vw;
+    object-fit: cover;
+
+}
+
+body,html {
+    padding : 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+
 .home_pic {
-    height: 400px;
-    text-align: center;
+    width: 600px;
+}
+
+.home_pic_profile {
+    width: 300px;
 }
 
 .grid-container {
     display: grid;
-    grid-template-columns: auto auto;
-    background-color: #cbdcea;
-    padding: 10px;
+    grid-template-columns: auto auto ;
+    grid-gap: 10px;
+    
   }
+
+.wrapper2 {
+    display: grid;
+    grid-template-columns: auto auto auto ;
+    grid-gap: 10px;
+    
+  }
+
+.img_box {
+    display: flex;
+    justify-content: center;
+}
+  
+.img_box img {
+    
+    width: 500px;
+    
+  }
+
+
+
+.detail img {
+    width: 80%;
+    height: 40vw;
+    object-fit: cover;
+}
+
+.detail {
+    text-align: center;
+    
+}
+
+.card-text {
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: bold;
+}
+
+.card-title {
+    font-size: 1em;
+}
+
+.card-a  {
+    text-align: center;
+}
+
+.img_update {
+    height: 300px;
+    width: 400px;
+}
+
+.img_update > img {
+    width: 80%;
+    height: 18vw;
+    object-fit: cover;
+}
+
+.form-label {
+    font-weight: bold;
+    color:rgb(26, 72, 132)
+}
+
+
+
