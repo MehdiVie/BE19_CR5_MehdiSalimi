@@ -17,16 +17,57 @@ include_once "public/db_connect.php";
 include_once "public/functions.php";
 
 $sql = "select * from user where id = ".$id;
-$row = retreive_form_database($connect,$sql);
+$row2 = retreive_form_database($connect,$sql);
 
 $layout="";
 
-$fname = $row['first_name'];
-$lname = $row['last_name'];
-$email = $row['email'];
-$address=$row['address'];
-$phone_number=$row['phone_number'];
-$picture = $row['picture'];
+$fname = $row2['first_name'];
+$lname = $row2['last_name'];
+$email = $row2['email'];
+$address=$row2['address'];
+$phone_number=$row2['phone_number'];
+$picture = $row2['picture'];
+
+$sql = "select * from animal where id in (select pet_id from pet_adoption where user_id = $id )";
+$result = mysqli_query($connect,$sql);
+
+
+
+if (mysqli_num_rows($result)) {
+
+    while($row = mysqli_fetch_assoc($result)) {
+
+        $layout .= "
+        <div class='card' style='width: 24rem;'>
+        
+        <img class='card-img-top' src='picture_animal/{$row['picture']}' alt='Card image cap'>
+        
+        <div class='card-body'>
+          
+          <h5 class='card-title'>Name: {$row['name']}</h5>
+          
+          <p class='card-text'>
+          {$row['status']} <br>
+          Type: {$row['type']} <br>
+          Age: {$row['age']} years old
+          </p>
+          
+          <p class='card-text'>";
+          $layout .= substr($row['description'],0,120)."...";
+          $layout .= "</p>";
+        $layout .="<div class='d-flex justify-content-between'>
+        <a href='detail.php?detail={$row['id']}' class='btn btn-primary p-2'>Show Detail</a>";
+        if ($row['status'] == 'Available') {
+            $layout.="<a href='detail.php?detail={$row['id']}&adoption=yes' class='btn btn-success p-2'>Take Me Home!</a>";
+        }
+        $layout.="</div>
+          </div>
+      </div>";
+    }
+
+} else {
+    $layout.="You have adopted no Pet yet!";
+}
 
 ?>
 <!DOCTYPE html>
@@ -45,9 +86,6 @@ $picture = $row['picture'];
     include_once "public/navbar.php";
     ?>
     </div>
-        <div>
-            <?= $layout ?>
-        </div>
         <h1 class="text-center">Home</h1>
         <div>
         <div class="grid-container border border-black p-3">
@@ -75,6 +113,12 @@ $picture = $row['picture'];
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Email :</label><?= $email ?>
+                </div>
+                <div>
+                    <h2 class="text-center text-success">Pet(s) Adopted by <?php echo $fname." ".$lname; ?>!</h2>
+                </div>
+                <div class="wrapper2">
+                    <?= $layout ?>
                 </div>
                 
             </div>

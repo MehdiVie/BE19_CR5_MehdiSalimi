@@ -4,9 +4,9 @@
     if (!isset($_SESSION['adm']) && !isset($_SESSION['user'])) {
             header( "Location: login.php" );
     } else if (isset($_SESSION['user'])) {
-        $user_id = isset($_SESSION['user']);
+        $user_id = $_SESSION['user'];
     } elseif (isset($_SESSION['adm']) ) {
-        $user_id = isset($_SESSION['adm']);
+        $user_id = $_SESSION['adm'];
     }
     
 
@@ -116,7 +116,14 @@
     <div class="container mt-5">
     <div class="grid-container border border-black p-3">
     <div>
-        <h2 class="text-primary">Detail</h2>
+            <a href="home.php" class="btn btn-warning">Back to home page</a>
+            <?php if ($adoption) { ?>
+                <a href="detail.php?pet_id=<?=$pet_id?>" class="btn btn-success">Take Me Home!</a>
+            <?php } ?>
+            <div>
+                <h2 class="text-primary">Detail</h2>
+            </div>
+            
         
             <div class="mb-3 mt-3 w-90">
                 <label for="name" class= "form-label">Name: </label><br><?=$name ?>

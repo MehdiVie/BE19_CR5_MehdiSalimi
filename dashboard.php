@@ -55,8 +55,8 @@
               $layout .= "</p>";
             $layout .="<div class='d-flex justify-content-between'>
             <a href='detail.php?detail={$row['id']}' class='btn btn-primary p-2'>Show Detail</a>
-            <a href='update.php?detail={$row['id']}' class='btn btn-warning p-2'>Update Media</a>
-            <a href='delete.php?detail={$row['id']}' class='btn btn-danger p-2'>Delete Media</a>
+            <a href='update.php?detail={$row['id']}' class='btn btn-warning p-2'>Update Case</a>
+            <a href='delete.php?detail={$row['id']}' class='btn btn-danger p-2'>Delete Case</a>
             </div>
               </div>
           </div>";

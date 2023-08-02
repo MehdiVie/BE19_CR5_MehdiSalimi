@@ -49,7 +49,7 @@
         $type = clean_inputs($_POST[ "type"]);
         $description = clean_inputs($_POST["description"]);
         $location = clean_inputs($_POST["location"]);
-        $status = $_POST['status'];
+        $status_new = $_POST['status'];
         $size = $_POST['size'];
         $vaccinated = $_POST['vaccinated'];
         
@@ -86,18 +86,39 @@
                 $picture_upload = $picture;
             }
 
-            $sql = "UPDATE `animal` SET `name`='$name',`picture`='$picture_upload',`location`='$location',`description`='$description',`size`='$size',`age`='$age',`vaccinated`='$vaccinated',`status`='$status',`type`='$type',`breed`='$breed' WHERE id = ". $id ;
+            $sql = "UPDATE `animal` SET `name`='$name',`picture`='$picture_upload',`location`='$location',`description`='$description',`size`='$size',`age`='$age',`vaccinated`='$vaccinated',`status`='$status_new',`type`='$type',`breed`='$breed' WHERE id = ". $id ;
+
+            
+
 
             if (mysqli_query($connect, $sql)) {
-                $picture = $picture_new[0];
-                $layout = "<div class='alert alert-success' role='alert'>
-                New Adoption Case has been created! , {$picture_new[1]}
+
+                if ($status_new == "Available" && $status== "Adopted") {
+
+                    $sql = "delete from pet_adoption where pet_id = ".$id;
+                    if (mysqli_query($connect, $sql)) {
+
+                        $layout .= "<div class='alert alert-success' role='alert'>
+                            Adoption record deleted!because of new Status!
+                            </div>";
+                    } else {
+
+                        $layout .= "<div class='alert alert-danger' role='alert'>
+                        Adoption record CAN NOT BE deleted !because of new Status!
+                        </div>";
+                    }
+
+                }
+
+                $picture = $picture_upload;
+                $layout .= "<div class='alert alert-success' role='alert'>
+                New Adoption Case has been created! 
                 </div>";
                 header("refresh : 3 , url = detail.php?detail=".$id);
 
             } else {
-                $layout = "<div class='alert alert-danger' role='alert'>
-                New Media has NOT been created! , {$picture_new[1]}
+                $layout .= "<div class='alert alert-danger' role='alert'>
+                New Media has NOT been created! 
                 </div>";
                 header("refresh : 3 , url = detail.php?detail=".$id);
             }
@@ -112,7 +133,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Library - Create new Media</title>
+    <title>Pet Adoption - Update Case</title>
     <link rel="stylesheet" href="css/main.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"  rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"  crossorigin="anonymous">
 </head>
@@ -124,7 +145,7 @@
     <div class="container mt-5">
     <div class="grid-container">
     <div>
-        <h2 class="text-primary">Create a new Adoption Case</h2>
+        <h2 class="text-primary">Update Adoption Case</h2>
         
         <form method="POST" enctype= "multipart/form-data">
             <div class="mb-3 mt-3 w-90">

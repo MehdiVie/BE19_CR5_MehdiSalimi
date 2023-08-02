@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 29, 2023 at 06:10 PM
+-- Generation Time: Aug 02, 2023 at 12:03 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -71,7 +71,8 @@ CREATE TABLE `pet_adoption` (
 --
 
 INSERT INTO `pet_adoption` (`id`, `user_id`, `pet_id`, `adoption_date`) VALUES
-(3, 1, 2, '2023-07-29');
+(9, 3, 2, '2023-08-02'),
+(10, 1, 6, '2023-08-02');
 
 -- --------------------------------------------------------
 
@@ -138,7 +139,7 @@ ALTER TABLE `animal`
 -- AUTO_INCREMENT for table `pet_adoption`
 --
 ALTER TABLE `pet_adoption`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `user`
